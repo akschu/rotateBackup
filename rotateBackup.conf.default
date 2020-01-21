@@ -1,0 +1,8 @@
+ROTATIONS=5
+PREFIX=server
+BACKUPSOURCE=/
+BACKUPDEST=/mnt/backup
+#REMOTEHOST=server
+#BWLIMIT=500
+EXCLUDES=/etc/rotateBackup.excludes
+INCLUDES=/etc/rotateBackup.includes

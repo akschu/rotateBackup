@@ -1,0 +1,32 @@
+#!/bin/sh
+
+PRGNAM=rotateBackup
+VERSION=1.0.1
+ARCH=${ARCH:-noarch}
+BUILD=${BUILD:-1}
+CWD=$(pwd)
+SRC=$TMP/$PRGNAM-$VERSION
+
+# make sure everything is fresh
+rm -rf $SRC
+
+# copy files
+mkdir -p $SRC/usr/sbin $SRC/etc
+cp $CWD/rotateBackup.sh $SRC/usr/sbin
+cp $CWD/rotateBackup.includes.default $SRC/etc
+cp $CWD/rotateBackup.conf.default $SRC/etc
+
+# make the package
+cd $SRC
+#mkdir install
+#cp $CWD/slack-desc install
+
+if [ `id -u` != 0 ]; then
+  echo "Skipping makepkg since you are not root";
+else 
+  /sbin/makepkg -l y -c n -p $CWD/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.tgz
+fi
+
+# clean up
+rm -rf $SRC
+
